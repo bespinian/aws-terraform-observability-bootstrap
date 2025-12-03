@@ -1,0 +1,78 @@
+# Copy this file to terraform.tfvars and update with your values
+
+region = "us-east-1"
+
+# ======================================================================================================================
+# Email Configuration for AWS Accounts
+# ======================================================================================================================
+# Root users for AWS accounts will use the following email pattern:
+#   <organization_email_prefix>+<account-name>@<organization_email_domain>
+#
+# Example:
+#   mycompany+coffeeshop-order-dev@example.com
+#   mycompany+coffeeshop-barista-dev@example.com
+
+organization_email_prefix = "mycompany"
+organization_email_domain = "example.com"
+
+# ======================================================================================================================
+# Domains and Workloads
+# ======================================================================================================================
+# Define your business domains and their workloads.
+# For each workload, an AWS account is automatically created for every environment defined below.
+#
+# Example:
+# If you add a workload "payment" to the "coffeeshop" domain and have environments = ["dev", "staging", "prod"],
+# Terraform will create:
+#   - coffeeshop-payment-dev
+#   - coffeeshop-payment-staging
+#   - coffeeshop-payment-prod
+#
+# You can add additional domains (e.g., retail, logistics, banking) and their workloads as needed.
+
+domains = {
+  "coffeeshop" = {
+    workloads = ["order", "barista"]
+  }
+  # Uncomment to add more domains:
+  # "retail" = {
+  #   workloads = ["inventory", "checkout", "analytics"]
+  # }
+}
+
+
+# ======================================================================================================================
+# Environments
+# ======================================================================================================================
+# List of environments for which an account will be created.
+# With ["dev"], only dev accounts will be provisioned:
+#   - coffeeshop-order-dev
+#   - coffeeshop-barista-dev
+#
+# If you add more (e.g., ["dev", "staging", "prod"]), Terraform will create accounts for each.
+
+environments = ["dev"]
+
+# ======================================================================================================================
+# Archive OU – Optional Safe Teardown Mode
+# ======================================================================================================================
+# To enable safe teardown without errors:
+#   1. Create an "archive" OU manually in AWS Organizations under the Root.
+#   2. Put its OU ID here (example: ou-abcd-xyz12345).
+#
+# When `archive_accounts = true`:
+#   - Terraform MOVE all managed accounts into the Archive OU.
+#   - Terraform WILL NOT attempt to close accounts.
+#   - Destroy becomes safe because workload and observability OUs are empty.
+#
+# When `archive_accounts = false` (default):
+#   - Accounts are placed normally inside workloads/<env> OUs.
+
+archive_ou_id     = ""        # e.g., "ou-abcd-archive123" (leave empty if not using archive mode)
+archive_accounts  = false     # Set to true BEFORE running destroy to move accounts into Archive OU
+
+# ======================================================================================================================
+# Additional Accounts
+# ======================================================================================================================
+# The module will also create:
+#   - observability (shared services account for monitoring)

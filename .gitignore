@@ -1,0 +1,53 @@
+# ----------------------------------------------------------------------------------------------------------------------
+# Terraform global ignore rules
+# ----------------------------------------------------------------------------------------------------------------------
+
+# Local .terraform directories
+**/.terraform/
+
+# Lock file
+.terraform.lock.hcl
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Sensitive variable files
+*.tfvars
+*.tfvars.json
+
+# Local override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform lock info
+.terraform.tfstate.lock.info
+
+# CLI configuration files
+.terraformrc
+terraform.rc
+
+# Optional: ignore graph output
+# *.dot
+
+# Optional: ignore plan files
+# *.tfplan
+# planout
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Lambda build artifacts / packaged zips
+# ----------------------------------------------------------------------------------------------------------------------
+**/builds/
+**/builds/*.zip
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Python cache (modules/serverless-app)
+# ----------------------------------------------------------------------------------------------------------------------
+__pycache__/
+*.pyc
