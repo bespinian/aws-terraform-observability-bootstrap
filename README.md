@@ -18,6 +18,24 @@ Unified "Single Pane of Glass" experience that allows us to view logs, metrics, 
 
 It comes with no additional infrastructure cost and zero manual setup for new accounts.
 
+## Blog Post Series
+
+This repository accompanies a series of blog posts on AWS observability. Each post builds on the previous one.
+
+| Blog Post                                                                      | Tag                   | Description                                     |
+|--------------------------------------------------------------------------------|-----------------------|-------------------------------------------------|
+| [No Account Left Behind](https://bespinian.io/en/blog/no-account-left-behind/) | `v1.0-oam-foundation` | Cross-account observability with CloudWatch OAM |
+| Instrumenting AWS Workloads the OTel Way                                       | `v2.0-otel`           | OpenTelemetry instrumentation (coming soon)     |
+| Hybrid Cloud Observability: On-Prem Meets AWS                                  | `v3.0-hybrid`         | On-premises to AWS monitoring (coming soon)     |
+
+To follow along with a specific blog post:
+```bash
+git clone https://github.com/bespinian/aws-terraform-observability-bootstrap.git
+git checkout v1.0-oam-foundation  # or the tag for your blog post
+```
+
+---
+
 In this post, we will build a fully automated solution using:
 - AWS Organizations for Organization structure.
 - CloudWatch Observability Access Manager (OAM) for the cross-account data link.
